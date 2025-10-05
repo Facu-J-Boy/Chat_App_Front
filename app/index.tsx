@@ -1,8 +1,14 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import { useRouter } from 'expo-router';
-import { Button } from 'react-native';
+import { Logo } from '../components/Logo';
 
 const icon = require('../assets/icon.png');
 
@@ -12,10 +18,19 @@ export default function Index() {
     <View style={styles.container}>
       <Text>index</Text>
       <Image style={styles.tinyLogo} source={icon} />
-      <Button
-        title="Go to Home"
+      <Logo size={200} />
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => router.navigate('/home')}
-      />
+      >
+        <Text>GO TO HOME</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.navigate('/login')}
+      >
+        <Text>GO TO LOGIN</Text>
+      </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );
@@ -29,7 +44,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tinyLogo: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
+  },
+  button: {
+    margin: 5,
+    padding: 10,
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
   },
 });
