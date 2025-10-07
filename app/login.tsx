@@ -10,8 +10,8 @@ import { FormInput } from '../components/FormInput';
 import { Logo } from '../components/Logo';
 
 type FormData = {
-  name: string;
-  email: string;
+  name_email: string;
+  password: string;
 };
 
 export default function Login() {
@@ -21,8 +21,8 @@ export default function Login() {
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: {
-      name: '',
-      email: '',
+      name_email: '',
+      password: '',
     },
   });
 
@@ -35,11 +35,10 @@ export default function Login() {
       <Text>Login</Text>
       <Logo />
       <FormInput
-        name="name"
+        name="name_email"
         control={control}
         label="Nombre o email"
         placeholder="Escribe tu nombre o correo"
-        error={errors.name}
         rules={{
           required: 'Este campo es obligatorio',
           pattern: {
@@ -51,17 +50,16 @@ export default function Login() {
         }}
       />
       <FormInput
-        name="email"
+        name="password"
+        isPassword
         control={control}
-        label="Correo"
-        placeholder="Escribe tu correo"
-        error={errors.email}
-        keyboardType="email-address"
+        label="Password"
+        placeholder="Your password"
         rules={{
-          required: 'El correo es obligatorio',
+          required: 'La contraseÑa es obligatoria',
           pattern: {
-            value: /\S+@\S+\.\S+/,
-            message: 'Correo inválido',
+            value: /^.{7,}$/,
+            message: 'Al menos 7 caracteres',
           },
         }}
       />
