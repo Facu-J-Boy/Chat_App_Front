@@ -32,13 +32,15 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Text>Login</Text>
-      <Logo />
+      <View style={styles.logoContainer}>
+        <Logo />
+        <Text>HEY</Text>
+      </View>
       <FormInput
         name="name_email"
         control={control}
-        label="Nombre o email"
-        placeholder="Escribe tu nombre o correo"
+        // label="Nombre o email"
+        placeholder="Username or email"
         rules={{
           required: 'Este campo es obligatorio',
           pattern: {
@@ -53,13 +55,13 @@ export default function Login() {
         name="password"
         isPassword
         control={control}
-        label="Password"
-        placeholder="Your password"
+        // label="Correo"
+        placeholder="Password"
         rules={{
-          required: 'La contraseÑa es obligatoria',
+          required: 'La contraseña es obligatoria',
           pattern: {
-            value: /^.{7,}$/,
-            message: 'Al menos 7 caracteres',
+            value: /\S+@\S+\.\S+/,
+            message: 'Contraseña inválido',
           },
         }}
       />
@@ -69,6 +71,7 @@ export default function Login() {
       >
         <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
+      <Text>Don't have an account? Sign Up</Text>
     </View>
   );
 }
@@ -76,17 +79,19 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // height: 1000,
     alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'red',
+    paddingTop: 100,
+    // justifyContent: 'center',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 100,
   },
   button: {
     margin: 5,
     padding: 10,
     alignItems: 'center',
-    backgroundColor: '#2F1B5F',
+    backgroundColor: '#47239f',
     borderRadius: 5,
     width: 300,
   },

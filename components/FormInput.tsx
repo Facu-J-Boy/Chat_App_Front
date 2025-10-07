@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: '#ccc',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
     borderRadius: 5,
     padding: 10,
     fontSize: 16,
