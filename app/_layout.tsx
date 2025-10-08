@@ -6,7 +6,7 @@ import {
 } from 'react-native-safe-area-context';
 import { View } from 'react-native';
 
-const isLoggedIn = false;
+const isLoggedIn = true;
 
 export default function StackLayout() {
   const insets = useSafeAreaInsets();

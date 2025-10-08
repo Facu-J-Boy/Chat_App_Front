@@ -1,11 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
+import { ChatCard } from '../../components/ChatCard';
+import { chats } from '../../info/chats';
 
 export default function ChatList() {
   return (
-    <View style={styles.container}>
-      <Text>Lista de chats</Text>
-    </View>
+    <FlatList
+      data={chats}
+      keyExtractor={(item) => item.index}
+      renderItem={({ item }) => (
+        <ChatCard
+          image={item.image}
+          name={item.name}
+          lastMessage={item.lastMessage}
+        />
+      )}
+    />
   );
 }
 
