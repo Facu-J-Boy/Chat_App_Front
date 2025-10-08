@@ -5,9 +5,10 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  Button,
 } from 'react-native';
-import { FormInput } from '../components/FormInput';
-import { Logo } from '../components/Logo';
+import { FormInput } from '../../components/FormInput';
+import { Logo } from '../../components/Logo';
 
 type FormData = {
   name_email: string;

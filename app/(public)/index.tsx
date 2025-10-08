@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Logo } from '../components/Logo';
+import { Logo } from '../../components/Logo';
 
-const icon = require('../assets/icon.png');
+const icon = require('../../assets/icon.png');
 
 export default function Index() {
   const router = useRouter();

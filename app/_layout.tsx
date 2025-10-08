@@ -6,8 +6,11 @@ import {
 } from 'react-native-safe-area-context';
 import { View } from 'react-native';
 
+const isLoggedIn = false;
+
 export default function StackLayout() {
   const insets = useSafeAreaInsets();
+
   return (
     <SafeAreaProvider>
       <View
@@ -17,19 +20,13 @@ export default function StackLayout() {
           paddingBottom: insets.bottom,
         }}
       >
-        <Stack>
-          <Stack.Screen
-            name="index"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="home"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="login"
-            options={{ headerShown: false }}
-          />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Protected guard={!isLoggedIn}>
+            <Stack.Screen name="(public)" />
+          </Stack.Protected>
+          <Stack.Protected guard={isLoggedIn}>
+            <Stack.Screen name="(private)" />
+          </Stack.Protected>
         </Stack>
       </View>
     </SafeAreaProvider>
