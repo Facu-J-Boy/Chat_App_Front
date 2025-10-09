@@ -1,4 +1,6 @@
+import { useRouter } from 'expo-router';
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
 interface ChatCardProps {
@@ -12,8 +14,14 @@ export const ChatCard: React.FC<ChatCardProps> = ({
   name,
   lastMessage,
 }) => {
+  const router = useRouter();
   return (
-    <View style={styles.chatContainer}>
+    <TouchableOpacity
+      style={styles.chatContainer}
+      onPress={() => {
+        router.navigate('/chat');
+      }}
+    >
       <Image style={styles.image} source={{ uri: image }} />
       <View style={styles.textContainer}>
         <Text style={styles.name}>{name}</Text>
@@ -28,7 +36,7 @@ export const ChatCard: React.FC<ChatCardProps> = ({
       <View>
         <Text>12:05</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
