@@ -12,12 +12,13 @@ export const BottomNav = () => {
   const pathname = usePathname();
 
   const router = useRouter();
-
-  console.log({ pathname });
   return (
     <View style={styles.bottomNavContainer}>
       <TouchableOpacity
-        style={styles.redirectionButton}
+        style={[
+          styles.redirectionButton,
+          pathname === '/chatlist' && styles.active,
+        ]}
         onPress={() => {
           router.navigate('/chatlist');
         }}
@@ -25,12 +26,21 @@ export const BottomNav = () => {
         <ChatIcon
           selected={pathname === '/chatlist'}
           size={25}
-          color="#fff"
+          color={pathname === '/chatlist' ? '#47239f' : '#333'}
         />
-        <Text style={{ color: '#fff' }}>Chats</Text>
+        <Text
+          style={{
+            color: pathname === '/chatlist' ? '#47239f' : '#333',
+          }}
+        >
+          Chats
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.redirectionButton}
+        style={[
+          styles.redirectionButton,
+          pathname === '/groups' && styles.active,
+        ]}
         onPress={() => {
           router.navigate('/groups');
         }}
@@ -38,12 +48,21 @@ export const BottomNav = () => {
         <GroupsIcon
           selected={pathname === '/groups'}
           size={25}
-          color="#fff"
+          color={pathname === '/groups' ? '#47239f' : '#333'}
         />
-        <Text style={{ color: '#fff' }}>Groups</Text>
+        <Text
+          style={{
+            color: pathname === '/groups' ? '#47239f' : '#333',
+          }}
+        >
+          Groups
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.redirectionButton}
+        style={[
+          styles.redirectionButton,
+          pathname === '/user' && styles.active,
+        ]}
         onPress={() => {
           router.navigate('/user');
         }}
@@ -51,9 +70,13 @@ export const BottomNav = () => {
         <UserIcon
           selected={pathname === '/user'}
           size={25}
-          color="#fff"
+          color={pathname === '/user' ? '#47239f' : '#333'}
         />
-        <Text style={{ color: '#fff' }}>Me</Text>
+        <Text
+          style={{ color: pathname === '/user' ? '#47239f' : '#333' }}
+        >
+          Me
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -61,13 +84,18 @@ export const BottomNav = () => {
 
 const styles = StyleSheet.create({
   bottomNavContainer: {
-    backgroundColor: '#47239f',
-    padding: 10,
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
   redirectionButton: {
     alignItems: 'center',
+    paddingTop: 10,
+  },
+  active: {
+    borderTopWidth: 2,
+    borderTopColor: '#47239f',
   },
 });

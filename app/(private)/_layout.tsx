@@ -12,7 +12,7 @@ export default function StackLayout() {
     segments.length > 1 ? segments[1] : undefined;
 
   // Lista de rutas donde no queremos mostrar BottomNav
-  const hiddenRoutes = ['chat', 'profile'];
+  const hiddenRoutes = ['chat'];
   const hideBottomNav = currentSegment
     ? hiddenRoutes.includes(currentSegment)
     : false;
