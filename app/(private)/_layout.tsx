@@ -19,9 +19,7 @@ export default function StackLayout() {
 
   return (
     <SafeAreaProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name={'chatlist'} />
-      </Stack>
+      <Stack screenOptions={{ headerShown: false }} />
       {!hideBottomNav && <BottomNav />}
     </SafeAreaProvider>
   );

@@ -17,20 +17,20 @@ export const BottomNav = () => {
       <TouchableOpacity
         style={[
           styles.redirectionButton,
-          pathname === '/chatlist' && styles.active,
+          pathname === '/' && styles.active,
         ]}
         onPress={() => {
-          router.navigate('/chatlist');
+          router.navigate('/');
         }}
       >
         <ChatIcon
-          selected={pathname === '/chatlist'}
+          selected={pathname === '/'}
           size={25}
-          color={pathname === '/chatlist' ? '#47239f' : '#333'}
+          color={pathname === '/' ? '#47239f' : '#333'}
         />
         <Text
           style={{
-            color: pathname === '/chatlist' ? '#47239f' : '#333',
+            color: pathname === '/' ? '#47239f' : '#333',
           }}
         >
           Chats
