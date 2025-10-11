@@ -10,10 +10,14 @@ export default function Chat() {
     <CustomKeyboardSafeView>
       <View style={styles.inner}>
         <FlatList
+          style={{ paddingHorizontal: 5 }}
           data={messages}
           keyExtractor={(item) => item.index}
           renderItem={({ item }) => (
-            <MessageBubble text={item.message} />
+            <MessageBubble
+              text={item.message}
+              isOwnMessage={item.isOwnMessage}
+            />
           )}
           contentContainerStyle={styles.messageList}
         />

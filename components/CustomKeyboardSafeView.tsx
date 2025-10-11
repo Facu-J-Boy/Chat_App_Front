@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Keyboard,
-  Animated,
   StyleSheet,
-  TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';

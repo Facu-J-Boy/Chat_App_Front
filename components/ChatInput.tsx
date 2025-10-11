@@ -11,13 +11,12 @@ export const ChatInput = () => {
 const styles = StyleSheet.create({
   conteiner: {
     height: 60,
-    borderWidth: 1,
     padding: 10,
     alignItems: 'center',
     width: '100%',
     backgroundColor: '#f9f9f9',
     borderTopWidth: 1,
-    borderColor: '#ddd',
+    borderTopColor: '#ddd',
   },
   input: {
     flex: 1,
