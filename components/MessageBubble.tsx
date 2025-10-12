@@ -23,8 +23,10 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
         style={[
           styles.bubble,
           isOwnMessage ? styles.ownBubble : styles.otherBubble,
-          isOwnMessage && !isSameUser && { borderTopRightRadius: 0 },
-          !isOwnMessage && !isSameUser && { borderTopLeftRadius: 0 },
+          isOwnMessage &&
+            !isSameUser && { borderTopRightRadius: 0, marginTop: 10 },
+          !isOwnMessage &&
+            !isSameUser && { borderTopLeftRadius: 0, marginTop: 10 },
         ]}
       >
         <Text style={styles.text}>{text}</Text>
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
   bubbleContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginVertical: 4,
+    marginVertical: 1,
   },
   bubble: {
     maxWidth: '70%',
