@@ -85,14 +85,14 @@ export const BottomNav = () => {
 const styles = StyleSheet.create({
   bottomNavContainer: {
     backgroundColor: '#fff',
-    paddingHorizontal: 10,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
   redirectionButton: {
     alignItems: 'center',
     paddingTop: 10,
+    width: '33%',
   },
   active: {
     borderTopWidth: 2,
