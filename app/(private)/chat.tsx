@@ -6,19 +6,28 @@ import { MessageBubble } from '../../components/MessageBubble';
 import { messages } from '../../info/messages';
 
 export default function Chat() {
+  const userId = 1;
+
   return (
     <CustomKeyboardSafeView>
       <View style={styles.inner}>
         <FlatList
           style={{ paddingHorizontal: 5 }}
           data={messages}
-          keyExtractor={(item) => item.index}
-          renderItem={({ item }) => (
-            <MessageBubble
-              text={item.message}
-              isOwnMessage={item.isOwnMessage}
-            />
-          )}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => {
+            const isSameUserAsPrevious =
+              index > 0 &&
+              messages[index].userId === messages[index - 1].userId;
+
+            return (
+              <MessageBubble
+                text={item.message}
+                isOwnMessage={item.userId === userId}
+                isSameUser={isSameUserAsPrevious}
+              />
+            );
+          }}
           contentContainerStyle={styles.messageList}
         />
         <ChatInput />

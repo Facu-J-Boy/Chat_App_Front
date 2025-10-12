@@ -4,11 +4,13 @@ import { Text, View, StyleSheet } from 'react-native';
 interface MessageBubbleProps {
   text: string;
   isOwnMessage: boolean;
+  isSameUser: boolean;
 }
 
 export const MessageBubble: React.FC<MessageBubbleProps> = ({
   text,
   isOwnMessage,
+  isSameUser,
 }) => {
   return (
     <View
@@ -21,6 +23,8 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
         style={[
           styles.bubble,
           isOwnMessage ? styles.ownBubble : styles.otherBubble,
+          isOwnMessage && !isSameUser && { borderTopRightRadius: 0 },
+          !isOwnMessage && !isSameUser && { borderTopLeftRadius: 0 },
         ]}
       >
         <Text style={styles.text}>{text}</Text>
@@ -38,17 +42,15 @@ const styles = StyleSheet.create({
   bubble: {
     maxWidth: '70%',
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 15,
   },
   text: {
     color: '#fff',
   },
   ownBubble: {
-    borderTopRightRadius: 0,
     backgroundColor: '#47239f',
   },
   otherBubble: {
-    borderTopLeftRadius: 0,
     backgroundColor: '#444',
   },
   rightAlign: {
