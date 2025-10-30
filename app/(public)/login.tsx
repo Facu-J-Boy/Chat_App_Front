@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { FormInput } from '../../components/FormInput';
 import { Logo } from '../../components/Logo';
+import { useSessionStore } from '../../store/sessionStore';
 
 type FormData = {
   name_email: string;
@@ -27,8 +28,11 @@ export default function Login() {
     },
   });
 
+  const { isLogged } = useSessionStore();
+
   const onSubmit = (data: FormData) => {
     console.log({ data });
+    isLogged();
   };
 
   return (
