@@ -6,7 +6,6 @@ import {
 } from 'react-native-safe-area-context';
 import { View } from 'react-native';
 import { useSessionStore } from '../store/sessionStore';
-import Constants from 'expo-constants';
 import { API_URL } from '../config';
 
 // const isLoggedIn = true;

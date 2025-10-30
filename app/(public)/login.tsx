@@ -5,8 +5,8 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Button,
 } from 'react-native';
+import { LoginAction } from '../../actions/Login';
 import { FormInput } from '../../components/FormInput';
 import { Logo } from '../../components/Logo';
 import { useSessionStore } from '../../store/sessionStore';
@@ -28,11 +28,11 @@ export default function Login() {
     },
   });
 
-  const { isLogged } = useSessionStore();
+  const { isLogged, setUser } = useSessionStore();
 
   const onSubmit = (data: FormData) => {
     console.log({ data });
-    isLogged();
+    LoginAction(data, setUser, isLogged);
   };
 
   return (
@@ -65,7 +65,7 @@ export default function Login() {
         rules={{
           required: 'La contraseña es obligatoria',
           pattern: {
-            value: /\S+@\S+\.\S+/,
+            value: /^.{5,}$/,
             message: 'Contraseña inválido',
           },
         }}
