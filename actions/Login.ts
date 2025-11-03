@@ -1,4 +1,5 @@
 import { axiosInstance } from '../api/axiosInstance';
+import { saveToken } from '../utils/tokenStorage';
 
 interface FormData {
   name_email: String;
@@ -23,8 +24,11 @@ export const LoginAction = async (
       data
     );
     const currentUser = response.data.user;
+    const { accessToken } = response.data;
     console.log({ response });
     if (currentUser) {
+      console.log({ accessToken });
+      saveToken(accessToken);
       isLogged(true);
       setUser(currentUser);
     }
