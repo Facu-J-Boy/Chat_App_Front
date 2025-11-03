@@ -8,9 +8,11 @@ interface FormData {
 
 export const LoginAction = async (
   formData: FormData,
+  setSessionLoading: (val: boolean) => void,
   setUser: (user: any) => void,
   isLogged: (val: boolean) => void
 ) => {
+  setSessionLoading(true);
   console.log('LoginAction ejecutado');
   const data = {
     email: formData.name_email,
@@ -29,8 +31,9 @@ export const LoginAction = async (
     if (currentUser) {
       console.log({ accessToken });
       saveToken(accessToken);
-      isLogged(true);
       setUser(currentUser);
+      isLogged(true);
+      setSessionLoading(false);
     }
   } catch (error) {
     console.log({ error });

@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import { LoginAction } from '../../actions/Login';
 import { FormInput } from '../../components/FormInput';
@@ -28,11 +29,12 @@ export default function Login() {
     },
   });
 
-  const { isLogged, setUser } = useSessionStore();
+  const { isLogged, setSessionLoading, sessionLoading, setUser } =
+    useSessionStore();
 
   const onSubmit = (data: FormData) => {
     console.log({ data });
-    LoginAction(data, setUser, isLogged);
+    LoginAction(data, setSessionLoading, setUser, isLogged);
   };
 
   return (
@@ -72,9 +74,14 @@ export default function Login() {
       />
       <TouchableOpacity
         style={styles.button}
+        disabled={sessionLoading}
         onPress={handleSubmit(onSubmit)}
       >
-        <Text style={styles.buttonText}>Log in</Text>
+        {sessionLoading ? (
+          <ActivityIndicator size="small" color="#fff" />
+        ) : (
+          <Text style={styles.buttonText}>Log in</Text>
+        )}
       </TouchableOpacity>
       <Text>Don't have an account? Sign Up</Text>
     </View>

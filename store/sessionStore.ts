@@ -11,19 +11,24 @@ type CurrentUser = {
 
 type SessionState = {
   isLoggedIn: boolean;
+  sessionLoading: boolean;
   currentUser: null | CurrentUser;
 };
 
 type SessionAction = {
   isLogged: (loggedIn: boolean) => void;
+  setSessionLoading: (loading: boolean) => void;
   setUser: (user: CurrentUser) => void;
 };
 
 export const useSessionStore = create<SessionState & SessionAction>(
   (set) => ({
     isLoggedIn: false,
+    sessionLoading: false,
     currentUser: null,
     isLogged: (loggedIn) => set(() => ({ isLoggedIn: loggedIn })),
+    setSessionLoading: (loading) =>
+      set(() => ({ sessionLoading: loading })),
     setUser: (user) => set(() => ({ currentUser: user })),
   })
 );
