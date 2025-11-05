@@ -12,7 +12,6 @@ import { API_URL } from '../config';
 
 export default function StackLayout() {
   const insets = useSafeAreaInsets();
-  console.log({ API_URL });
 
   // Ver estado actual
   console.log(useSessionStore.getState());

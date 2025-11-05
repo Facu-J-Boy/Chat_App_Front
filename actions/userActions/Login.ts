@@ -1,5 +1,5 @@
-import { axiosInstance } from '../api/axiosInstance';
-import { saveToken } from '../utils/tokenStorage';
+import { axiosInstance } from '../../api/axiosInstance';
+import { saveToken } from '../../utils/tokenStorage';
 
 interface FormData {
   name_email: String;
@@ -13,30 +13,22 @@ export const LoginAction = async (
   isLogged: (val: boolean) => void
 ) => {
   setSessionLoading(true);
-  console.log('LoginAction ejecutado');
   const data = {
     email: formData.name_email,
     password: formData.password,
   };
 
-  console.log({ formData });
   try {
-    const response = await axiosInstance.post(
-      '/api/auth/signin',
-      data
-    );
-    const currentUser = response.data.user;
-    const { accessToken } = response.data;
-    console.log({ response });
+    const res = await axiosInstance.post('/api/auth/signin', data);
+    const currentUser = res.data.user;
+    const { accessToken } = res.data;
     if (currentUser) {
-      console.log({ accessToken });
       saveToken(accessToken);
       setUser(currentUser);
       isLogged(true);
       setSessionLoading(false);
     }
   } catch (error) {
-    console.log({ error });
     throw error.response.data.error;
   }
 };

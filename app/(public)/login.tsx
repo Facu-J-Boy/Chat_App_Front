@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { LoginAction } from '../../actions/Login';
+import { LoginAction } from '../../actions/userActions/Login';
 import { FormInput } from '../../components/FormInput';
 import { Logo } from '../../components/Logo';
 import { useSessionStore } from '../../store/sessionStore';
@@ -33,7 +33,6 @@ export default function Login() {
     useSessionStore();
 
   const onSubmit = (data: FormData) => {
-    console.log({ data });
     LoginAction(data, setSessionLoading, setUser, isLogged);
   };
 
