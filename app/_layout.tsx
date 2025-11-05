@@ -5,11 +5,21 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import { View } from 'react-native';
+import { useSessionStore } from '../store/sessionStore';
+import { API_URL } from '../config';
 
-const isLoggedIn = true;
+// const isLoggedIn = true;
 
 export default function StackLayout() {
   const insets = useSafeAreaInsets();
+
+  // Ver estado actual
+  console.log(useSessionStore.getState());
+
+  // Escuchar cambios
+  useSessionStore.subscribe((state) => console.log('Estado:', state));
+
+  const { isLoggedIn } = useSessionStore();
 
   return (
     <SafeAreaProvider>

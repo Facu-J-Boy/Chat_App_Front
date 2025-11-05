@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { ChatCard } from '../../components/ChatCard';
 import { chats } from '../../info/chats';
+import { GetChatList } from '../../actions/chatActions/GetChatList';
 
 export default function ChatList() {
+  useEffect(() => {
+    GetChatList(false);
+  }, []);
+
   return (
     <FlatList
       data={chats}

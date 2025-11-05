@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
+
 export const ChatInput = () => {
   return (
     <View style={styles.conteiner}>

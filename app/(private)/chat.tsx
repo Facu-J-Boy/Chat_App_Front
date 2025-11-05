@@ -14,7 +14,7 @@ export default function Chat() {
         <FlatList
           style={{ paddingHorizontal: 5 }}
           data={messages}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(item) => item.id}
           renderItem={({ item, index }) => {
             const isSameUserAsPrevious =
               index > 0 &&
