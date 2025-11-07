@@ -1,10 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
+import { chats } from '../../info/chats';
+import { ChatCard } from '../../components/ChatCard';
 
 export default function Groups() {
   return (
-    <View>
-      <Text>Groups</Text>
-    </View>
-  );
+      <FlatList
+        data={chats}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <ChatCard
+            image={item.image}
+            name={item.name}
+            lastMessage={item.lastMessage}
+          />
+        )}
+      />
+    );
 }

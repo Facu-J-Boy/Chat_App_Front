@@ -6,7 +6,7 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 interface ChatCardProps {
   image: string;
   name: string;
-  lastMessage: string;
+  lastMessage: string | null;
 }
 
 export const ChatCard: React.FC<ChatCardProps> = ({
@@ -30,7 +30,7 @@ export const ChatCard: React.FC<ChatCardProps> = ({
           numberOfLines={1}
           ellipsizeMode="tail"
         >
-          {lastMessage}
+          {lastMessage? lastMessage : ''}
         </Text>
       </View>
       <View>
