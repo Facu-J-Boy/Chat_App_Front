@@ -6,7 +6,7 @@ import {
 } from 'react-native-safe-area-context';
 import { View } from 'react-native';
 import { useSessionStore } from '../store/sessionStore';
-import { API_URL } from '../config';
+import { useChatsStore } from '../store/chatsStore';
 
 // const isLoggedIn = true;
 
@@ -18,6 +18,7 @@ export default function StackLayout() {
 
   // Escuchar cambios
   useSessionStore.subscribe((state) => console.log('Estado:', state));
+  useChatsStore.subscribe((state) => console.log('Estado de chats:', state));
 
   const { isLoggedIn } = useSessionStore();
 

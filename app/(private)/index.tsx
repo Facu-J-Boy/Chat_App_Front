@@ -3,21 +3,26 @@ import { StyleSheet, FlatList } from 'react-native';
 import { ChatCard } from '../../components/ChatCard';
 import { chats } from '../../info/chats';
 import { GetChatList } from '../../actions/chatActions/GetChatList';
+import { useChatsStore } from '../../store/chatsStore';
 
 export default function ChatList() {
+
+  const {chatList, setChatList} = useChatsStore();
+
   useEffect(() => {
-    GetChatList(false);
+    GetChatList(false, setChatList);
   }, []);
+
 
   return (
     <FlatList
-      data={chats}
-      keyExtractor={(item) => item.index}
+      data={chatList}
+      keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <ChatCard
-          image={item.image}
-          name={item.name}
-          lastMessage={item.lastMessage}
+          image={item.users[0].profile_image}
+          name={item.users[0].name}
+          lastMessage={item.lastMessage?.text || null}
         />
       )}
     />

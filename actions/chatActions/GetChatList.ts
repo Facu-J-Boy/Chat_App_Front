@@ -25,7 +25,7 @@ const query = `
   }
 `;
 
-export const GetChatList = async (isGroup: boolean) => {
+export const GetChatList = async (isGroup: boolean, setChatList:(chatList: any) => void) => {
   console.log('getChatList ejecutado');
   try {
     const token = await getAccessToken();
@@ -43,9 +43,10 @@ export const GetChatList = async (isGroup: boolean) => {
     console.log('AccessToken:', token);
     console.log({ res });
     const { getChats } = res.data.data;
+    setChatList(getChats);
     console.log('RESPONSE:', getChats);
   } catch (error) {
     console.log({ error });
-    throw error.response.data.error;
+    throw error;
   }
 };
