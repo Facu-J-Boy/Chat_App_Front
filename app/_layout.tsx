@@ -17,8 +17,12 @@ export default function StackLayout() {
   console.log(useSessionStore.getState());
 
   // Escuchar cambios
-  useSessionStore.subscribe((state) => console.log('Estado:', state));
-  useChatsStore.subscribe((state) => console.log('Estado de chats:', state));
+  useSessionStore.subscribe((state) =>
+    console.log('Estado:', JSON.stringify(state, null, 2))
+  );
+  useChatsStore.subscribe((state) =>
+    console.log('Estado de chats:', JSON.stringify(state, null, 2))
+  );
 
   const { isLoggedIn } = useSessionStore();
 

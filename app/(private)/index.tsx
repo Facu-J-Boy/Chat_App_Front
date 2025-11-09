@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { ChatCard } from '../../components/ChatCard';
-import { chats } from '../../info/chats';
 import { GetChatList } from '../../actions/chatActions/GetChatList';
 import { useChatsStore } from '../../store/chatsStore';
 
@@ -10,7 +9,7 @@ export default function ChatList() {
   const {chatList, setChatList} = useChatsStore();
 
   useEffect(() => {
-    GetChatList(false, setChatList);
+    !chatList.length && GetChatList(false, setChatList);
   }, []);
 
 

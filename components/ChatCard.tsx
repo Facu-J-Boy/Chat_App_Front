@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import { Avatar } from 'react-native-paper';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
 interface ChatCardProps {
@@ -9,12 +10,28 @@ interface ChatCardProps {
   lastMessage: string | null;
 }
 
+const getColorFromName = (name: string) => {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let color = '#';
+  for (let i = 0; i < 3; i++) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += ('00' + value.toString(16)).slice(-2);
+  }
+  return color;
+};
+
 export const ChatCard: React.FC<ChatCardProps> = ({
   image,
   name,
   lastMessage,
 }) => {
   const router = useRouter();
+
+  const bgColor = getColorFromName(name);
+
   return (
     <TouchableOpacity
       style={styles.chatContainer}
@@ -22,7 +39,22 @@ export const ChatCard: React.FC<ChatCardProps> = ({
         router.navigate('/chat');
       }}
     >
-      <Image style={styles.image} source={{ uri: image }} />
+      {image ? (
+        <Image
+          style={styles.image}
+          source={{
+            uri: image,
+          }}
+        />
+      ) : (
+        <Avatar.Text
+          style={{ marginRight: 20, backgroundColor: bgColor }}
+          size={60}
+          label={name.charAt(0).toUpperCase()}
+          color="#fff"
+        />
+      )}
+
       <View style={styles.textContainer}>
         <Text style={styles.name}>{name}</Text>
         <Text
@@ -30,7 +62,7 @@ export const ChatCard: React.FC<ChatCardProps> = ({
           numberOfLines={1}
           ellipsizeMode="tail"
         >
-          {lastMessage? lastMessage : ''}
+          {lastMessage ? lastMessage : ''}
         </Text>
       </View>
       <View>
@@ -45,16 +77,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 15,
-
-    // borderWidth: 1,
-    // borderColor: 'red',
   },
   image: {
     width: 60,
     height: 60,
     borderRadius: 100,
-    // borderWidth: 1,
-    // borderColor: 'red',
     marginRight: 20,
   },
   textContainer: {

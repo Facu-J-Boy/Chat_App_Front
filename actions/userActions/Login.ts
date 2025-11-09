@@ -29,6 +29,8 @@ export const LoginAction = async (
       setSessionLoading(false);
     }
   } catch (error) {
+    setSessionLoading(false);
+    console.log({error})
     throw error;
   }
 };
