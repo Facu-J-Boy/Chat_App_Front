@@ -25,7 +25,14 @@ const query = `
   }
 `;
 
-export const GetChatList = async (isGroup: boolean, setChatList:(chatList: any) => void) => {
+interface GetChatsData {
+  isGroup: boolean;
+  setChatList?: (chatList: any) => void | undefined;
+  setGroupList?: (groupList: any) => void | undefined;
+}
+
+export const GetChatList = async (data: GetChatsData) => {
+  const { isGroup, setChatList, setGroupList } = data;
   console.log('getChatList ejecutado');
   try {
     const token = await getAccessToken();
@@ -43,8 +50,13 @@ export const GetChatList = async (isGroup: boolean, setChatList:(chatList: any) 
     console.log('AccessToken:', token);
     console.log({ res });
     const { getChats } = res.data.data;
-    setChatList(getChats);
     console.log('RESPONSE:', getChats);
+    if (isGroup && setGroupList) {
+      setGroupList(getChats);
+    }
+    if (!isGroup && setChatList) {
+      setChatList(getChats);
+    }
   } catch (error) {
     console.log({ error });
     throw error;
