@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { ChatCard } from '../../components/ChatCard';
-import { GetChatList } from '../../actions/chatActions/GetChatList';
 import { useChatsStore } from '../../store/chatsStore';
+import { GetChatList } from '../../actions/chatActions/getChatList';
 
 export default function ChatList() {
-
-  const {chatList, setChatList} = useChatsStore();
+  const { chatList, setChatList } = useChatsStore();
 
   useEffect(() => {
-    !chatList.length && GetChatList(false, setChatList);
+    !chatList.length && GetChatList({ isGroup: false, setChatList });
   }, []);
-
 
   return (
     <FlatList
