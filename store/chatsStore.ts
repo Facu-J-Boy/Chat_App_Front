@@ -13,16 +13,18 @@ type Message = {
   createdAt: string;
 };
 
-type Chat = {
+export type Chat = {
   id: number;
+  isGroup: boolean;
   name: string;
+  chat_image: string;
   users: [User];
   lastMessage: Message;
 };
 
 type ChatListState = {
-  chatList: [Chat] | [];
-  groupsList: [Chat] | [];
+  chatList: Chat[] | [];
+  groupsList: Chat[] | [];
   chatListLoading: boolean;
   groupsListLoading: boolean;
 };

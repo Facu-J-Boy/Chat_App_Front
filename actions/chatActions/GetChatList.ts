@@ -1,12 +1,19 @@
 import { axiosInstance } from '../../api/axiosInstance';
 import { getAccessToken } from '../../utils/tokenStorage';
 
-const query = `
-  query GetChats($isGroup: Boolean) {
-    getChats(isGroup: $isGroup) {
+interface GetChatsData {
+  isGroup: boolean;
+  setChatList?: (chatList: any) => void | undefined;
+  setGroupList?: (groupList: any) => void | undefined;
+}
+
+export const GetChatList = async (data: GetChatsData) => {
+  const { isGroup, setChatList, setGroupList } = data;
+
+  const fields = `
       id
       isGroup
-      name
+      ${isGroup ? 'name chat_image' : ''}
       users {
         id
         name
@@ -20,25 +27,22 @@ const query = `
         }
         text
         createdAt
-      }
-    }
-  }
-`;
-
-interface GetChatsData {
-  isGroup: boolean;
-  setChatList?: (chatList: any) => void | undefined;
-  setGroupList?: (groupList: any) => void | undefined;
-}
-
-export const GetChatList = async (data: GetChatsData) => {
-  const { isGroup, setChatList, setGroupList } = data;
+      }`;
   console.log('getChatList ejecutado');
   try {
     const token = await getAccessToken();
     const res = await axiosInstance.post(
       '/graphql',
-      { query, variables: { isGroup } },
+      {
+        query: `
+          query GetChats($isGroup: Boolean) {
+            getChats(isGroup: $isGroup) {
+              ${fields}
+            }
+          }
+        `,
+        variables: { isGroup },
+      },
       {
         headers: {
           'Content-Type': 'application/json',
