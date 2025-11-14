@@ -1,29 +1,17 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, FlatList } from 'react-native';
-import { ChatCard } from '../../components/ChatCard';
+import { StyleSheet } from 'react-native';
 import { useChatsStore } from '../../store/chatsStore';
 import { GetChatList } from '../../actions/chatActions/getChatList';
+import { ChatList } from '../../components/ChatList';
 
-export default function ChatList() {
+export default function Index() {
   const { chatList, setChatList } = useChatsStore();
 
   useEffect(() => {
     !chatList.length && GetChatList({ isGroup: false, setChatList });
   }, []);
 
-  return (
-    <FlatList
-      data={chatList}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => (
-        <ChatCard
-          image={item.users[0].profile_image}
-          name={item.users[0].name}
-          lastMessage={item.lastMessage?.text || null}
-        />
-      )}
-    />
-  );
+  return <ChatList data={chatList} />;
 }
 
 const styles = StyleSheet.create({
