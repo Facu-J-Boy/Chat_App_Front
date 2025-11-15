@@ -1,30 +1,9 @@
 import { create } from 'zustand';
-
-export type User = {
-  id: number;
-  name: string;
-  profile_image: string;
-};
-
-type Message = {
-  id: number;
-  sender: User;
-  text: string;
-  createdAt: string;
-};
-
-export type Chat = {
-  id: number;
-  isGroup: boolean;
-  name: string;
-  chat_image: string;
-  users: [User];
-  lastMessage: Message;
-};
+import { ChatInterface } from '../interfaces';
 
 type ChatListState = {
-  chatList: Chat[] | [];
-  groupsList: Chat[] | [];
+  chatList: ChatInterface[] | [];
+  groupsList: ChatInterface[] | [];
   chatListLoading: boolean;
   groupsListLoading: boolean;
 };
@@ -32,8 +11,8 @@ type ChatListState = {
 type ChatListAction = {
   setChatListLoading: (loading: boolean) => void;
   setGroupListLoading: (loading: boolean) => void;
-  setChatList: (chatList: [Chat]) => void;
-  setGroupList: (groupList: [Chat]) => void;
+  setChatList: (chatList: [ChatInterface]) => void;
+  setGroupList: (groupList: [ChatInterface]) => void;
 };
 
 export const useChatsStore = create<ChatListState & ChatListAction>(

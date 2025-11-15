@@ -1,24 +1,16 @@
 import { create } from 'zustand';
-
-type CurrentUser = {
-  id: number;
-  name: String;
-  userName: String;
-  email: String;
-  password: String;
-  profile_image: null | String;
-};
+import { UserInterface } from '../interfaces';
 
 type SessionState = {
   isLoggedIn: boolean;
   sessionLoading: boolean;
-  currentUser: null | CurrentUser;
+  currentUser: null | UserInterface;
 };
 
 type SessionAction = {
   isLogged: (loggedIn: boolean) => void;
   setSessionLoading: (loading: boolean) => void;
-  setUser: (user: CurrentUser) => void;
+  setUser: (user: UserInterface) => void;
 };
 
 export const useSessionStore = create<SessionState & SessionAction>(

@@ -1,21 +1,14 @@
 import { create } from 'zustand';
-import { User } from './chatsStore';
-
-type Message = {
-  id: number;
-  text: string;
-  sender: User;
-  createdAt: string;
-};
+import { MessageInterface } from '../interfaces';
 
 type MessagesState = {
-  messages: Record<number, Message[]>;
+  messages: Record<number, MessageInterface[]>;
 };
 
 type MessagesAction = {
-  setMessages: (chatId: number, msg: Message[]) => void;
-  addMessage: (chatId: number, msg: Message) => void;
-  prependMessages: (chatId: number, msgs: Message[]) => void; // para paginación
+  setMessages: (chatId: number, msg: MessageInterface[]) => void;
+  addMessage: (chatId: number, msg: MessageInterface) => void;
+  prependMessages: (chatId: number, msgs: MessageInterface[]) => void; // para paginación
 };
 
 export const useMessageStore = create<MessagesState & MessagesAction>(
