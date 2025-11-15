@@ -41,9 +41,9 @@ export default function Chat() {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => {
             const isSameUserAsPrevious =
-              index > 0 &&
+              index < chatMessages.length - 1 &&
               chatMessages[index].sender.id ===
-                chatMessages[index - 1].sender.id;
+                chatMessages[index + 1].sender.id;
 
             return (
               <MessageBubble
