@@ -51,7 +51,6 @@ export const GetChatList = async (data: GetChatsData) => {
         },
       }
     );
-    console.log('AccessToken:', token);
     console.log({ res });
     const { getChats } = res.data.data;
     console.log('RESPONSE:', getChats);

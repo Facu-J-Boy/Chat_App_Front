@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type User = {
+export type User = {
   id: number;
   name: string;
   profile_image: string;

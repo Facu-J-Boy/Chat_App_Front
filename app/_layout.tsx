@@ -7,6 +7,7 @@ import {
 import { View } from 'react-native';
 import { useSessionStore } from '../store/sessionStore';
 import { useChatsStore } from '../store/chatsStore';
+import { useMessageStore } from '../store/messagesStore';
 
 // const isLoggedIn = true;
 
@@ -22,6 +23,10 @@ export default function StackLayout() {
   );
   useChatsStore.subscribe((state) =>
     console.log('Estado de chats:', JSON.stringify(state, null, 2))
+  );
+
+  useMessageStore.subscribe((state) =>
+    console.log('Estado de mensajes:', JSON.stringify(state, null, 2))
   );
 
   const { isLoggedIn } = useSessionStore();

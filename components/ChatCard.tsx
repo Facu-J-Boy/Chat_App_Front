@@ -5,6 +5,7 @@ import { Avatar } from 'react-native-paper';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
 interface ChatCardProps {
+  chatId: number;
   image: string;
   name: string;
   lastMessage: string | null;
@@ -24,6 +25,7 @@ const getColorFromName = (name: string) => {
 };
 
 export const ChatCard: React.FC<ChatCardProps> = ({
+  chatId,
   image,
   name,
   lastMessage,
@@ -36,7 +38,7 @@ export const ChatCard: React.FC<ChatCardProps> = ({
     <TouchableOpacity
       style={styles.chatContainer}
       onPress={() => {
-        router.navigate('/chat');
+        router.navigate(`/chat/${chatId}`);
       }}
     >
       {image ? (
