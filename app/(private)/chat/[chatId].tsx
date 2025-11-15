@@ -8,11 +8,12 @@ import { useLocalSearchParams } from 'expo-router';
 import { getchatMessages } from '../../../actions/messageActions/getChatMessages';
 import { useMessageStore } from '../../../store/messagesStore';
 import { useSessionStore } from '../../../store/sessionStore';
+import { ChatHeader } from '../../../components/ChatHeader';
 
 export default function Chat() {
   const { chatId } = useLocalSearchParams();
 
-  const { messages, setMessages } = useMessageStore();
+  const { chatHeader, messages, setMessages } = useMessageStore();
 
   const { currentUser } = useSessionStore();
 
@@ -34,6 +35,7 @@ export default function Chat() {
 
   return (
     <CustomKeyboardSafeView>
+      {chatHeader && <ChatHeader data={chatHeader} />}
       <View style={styles.inner}>
         <FlatList
           style={{ paddingHorizontal: 5 }}
@@ -69,6 +71,21 @@ const styles = StyleSheet.create({
   inner: {
     flex: 1,
     justifyContent: 'space-between',
+    // borderWidth: 1,
+    // borderColor: 'red',
+  },
+  header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 10,
+    elevation: 10, // Android
+    borderWidth: 1,
+    borderColor: 'red',
   },
   messageList: {
     paddingBottom: 10, // espacio mínimo para el input

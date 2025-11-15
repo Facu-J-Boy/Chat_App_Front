@@ -4,15 +4,9 @@ import { TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { View, Image, Text, StyleSheet } from 'react-native';
 import { ChatInterface } from '../interfaces';
+import { useMessageStore } from '../store/messagesStore';
 
-// interface ChatCardProps {
-//   chatId: number;
-//   image: string;
-//   name: string;
-//   lastMessage: string | null;
-// }
-
-const getColorFromName = (name: string) => {
+export const getColorFromName = (name: string) => {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
@@ -34,6 +28,8 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data }) => {
 
   const router = useRouter();
 
+  const { setChatHeader } = useMessageStore();
+
   const chat_title = isGroup ? name : users[0].name;
 
   const image = isGroup ? chat_image : users[0].profile_image;
@@ -46,6 +42,7 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data }) => {
     <TouchableOpacity
       style={styles.chatContainer}
       onPress={() => {
+        setChatHeader(data);
         router.navigate(`/chat/${id}`);
       }}
     >
