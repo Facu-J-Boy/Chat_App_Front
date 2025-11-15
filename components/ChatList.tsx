@@ -14,6 +14,7 @@ export const ChatList: React.FC<ChatListprops> = ({ data }) => {
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <ChatCard
+          chatId={item.id}
           image={
             item.isGroup
               ? item.chat_image
