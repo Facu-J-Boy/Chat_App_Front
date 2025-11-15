@@ -3,13 +3,14 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { View, Image, Text, StyleSheet } from 'react-native';
+import { ChatInterface } from '../interfaces';
 
-interface ChatCardProps {
-  chatId: number;
-  image: string;
-  name: string;
-  lastMessage: string | null;
-}
+// interface ChatCardProps {
+//   chatId: number;
+//   image: string;
+//   name: string;
+//   lastMessage: string | null;
+// }
 
 const getColorFromName = (name: string) => {
   let hash = 0;
@@ -24,21 +25,28 @@ const getColorFromName = (name: string) => {
   return color;
 };
 
-export const ChatCard: React.FC<ChatCardProps> = ({
-  chatId,
-  image,
-  name,
-  lastMessage,
-}) => {
+interface ChatCardProps {
+  data: ChatInterface;
+}
+
+export const ChatCard: React.FC<ChatCardProps> = ({ data }) => {
+  const { id, name, isGroup, chat_image, users, lastMessage } = data;
+
   const router = useRouter();
 
-  const bgColor = getColorFromName(name);
+  const chat_title = isGroup ? name : users[0].name;
+
+  const image = isGroup ? chat_image : users[0].profile_image;
+
+  const last_message = lastMessage?.text || null;
+
+  const bgColor = getColorFromName(chat_title);
 
   return (
     <TouchableOpacity
       style={styles.chatContainer}
       onPress={() => {
-        router.navigate(`/chat/${chatId}`);
+        router.navigate(`/chat/${id}`);
       }}
     >
       {image ? (
@@ -52,19 +60,19 @@ export const ChatCard: React.FC<ChatCardProps> = ({
         <Avatar.Text
           style={{ marginRight: 20, backgroundColor: bgColor }}
           size={60}
-          label={name.charAt(0).toUpperCase()}
+          label={chat_title.charAt(0).toUpperCase()}
           color="#fff"
         />
       )}
 
       <View style={styles.textContainer}>
-        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.name}>{chat_title}</Text>
         <Text
           style={styles.lastMessage}
           numberOfLines={1}
           ellipsizeMode="tail"
         >
-          {lastMessage ? lastMessage : ''}
+          {last_message ? last_message : ''}
         </Text>
       </View>
       <View>
