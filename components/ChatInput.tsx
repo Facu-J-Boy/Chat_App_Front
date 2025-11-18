@@ -1,10 +1,53 @@
 import React from 'react';
-import { TextInput, View, StyleSheet } from 'react-native';
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Controller, useForm } from 'react-hook-form';
+
+type ChatInputData = {
+  text: string;
+};
 
 export const ChatInput = () => {
+  const { control, handleSubmit } = useForm<ChatInputData>({
+    defaultValues: {
+      text: '',
+    },
+  });
+
+  const onSubmit = (data: ChatInputData) => {
+    console.log('chatInputData: ', data);
+  };
   return (
     <View style={styles.conteiner}>
-      <TextInput style={styles.input} />
+      <Controller
+        name={'text'}
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <>
+            <TextInput
+              style={styles.input}
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+            />
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={handleSubmit(onSubmit)}
+            >
+              <Ionicons
+                name="send"
+                size={24}
+                color={value ? '#47239f' : '#ccc'}
+              />
+            </TouchableOpacity>
+          </>
+        )}
+      />
     </View>
   );
 };
@@ -28,5 +71,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#ccc',
+  },
+  iconContainer: {
+    // borderWidth: 1,
+    // borderColor: 'red',
+    paddingLeft: 5,
+    backgroundColor: '#f9f9f9',
+    position: 'absolute',
+    right: 20,
+    top: 15,
   },
 });
