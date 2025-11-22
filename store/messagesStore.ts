@@ -30,7 +30,7 @@ export const useMessageStore = create<MessagesState & MessagesAction>(
       set((state) => ({
         messages: {
           ...state.messages,
-          [chatId]: [...(state.messages[chatId] || []), msg],
+          [chatId]: [msg, ...(state.messages[chatId] || [])],
         },
       })),
 
@@ -38,7 +38,7 @@ export const useMessageStore = create<MessagesState & MessagesAction>(
       set((state) => ({
         messages: {
           ...state.messages,
-          [chatId]: [...msgs, ...(state.messages[chatId] || [])],
+          [chatId]: [...(state.messages[chatId] || []), ...msgs],
         },
       })),
   })
