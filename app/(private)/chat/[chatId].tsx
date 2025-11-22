@@ -3,7 +3,6 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import { ChatInput } from '../../../components/ChatInput';
 import { CustomKeyboardSafeView } from '../../../components/CustomKeyboardSafeView';
 import { MessageBubble } from '../../../components/MessageBubble';
-import { messages } from '../../../info/messages';
 import { useLocalSearchParams } from 'expo-router';
 import { getchatMessages } from '../../../actions/messageActions/getChatMessages';
 import { useMessageStore } from '../../../store/messagesStore';
