@@ -1,21 +1,44 @@
 import { useSubscription } from '@apollo/client/react';
 import { useMessageStore } from '../store/messagesStore';
 import { gql } from '@apollo/client';
+import { useChatsStore } from '../store/chatsStore';
 
 const MESSAGE_SENT = gql`
   subscription MessageSent {
     messageSent {
-      chat {
+      message {
         id
+        text
+        createdAt
+        chat {
+          id
+        }
+        sender {
+          id
+          name
+          profile_image
+        }
       }
-      id
-      text
-      createdAt
-      sender {
+      chatSummary {
         id
         name
-        email
-        profile_image
+        chat_image
+        isGroup
+        lastMessage {
+          id
+          text
+          createdAt
+          sender {
+            id
+            name
+            profile_image
+          }
+        }
+        users {
+          id
+          name
+          profile_image
+        }
       }
     }
   }
@@ -23,13 +46,16 @@ const MESSAGE_SENT = gql`
 
 export const GlobalMessageListener = () => {
   const { addMessage } = useMessageStore();
+  const { updateChatLastMessage } = useChatsStore();
 
   useSubscription(MESSAGE_SENT, {
     onData: ({ data }: any) => {
-      const msg = data.data?.messageSent;
-      const id = msg.chat.id;
-      addMessage(id, msg);
-      console.log({ msg });
+      const { message, chatSummary } = data.data?.messageSent;
+      const { id } = message.chat;
+      addMessage(id, message);
+      updateChatLastMessage(chatSummary);
+
+      console.log({ message });
     },
     onError: (err) => {
       console.log('❌ Subscription error:', err);
