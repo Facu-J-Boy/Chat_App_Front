@@ -35,7 +35,6 @@ export const getchatMessages = async (data: GetMessagesData) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          // Authorization opcional
           Authorization: `Bearer ${token}`,
         },
       }

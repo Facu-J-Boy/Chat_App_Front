@@ -7,12 +7,13 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Controller, useForm } from 'react-hook-form';
+import { sendMessage } from '../actions/messageActions/sendMessage';
 
 type ChatInputData = {
   text: string;
 };
 
-export const ChatInput = () => {
+export const ChatInput = ({ chatId }: { chatId: number }) => {
   const [height, setHeight] = useState(60);
 
   const { control, handleSubmit, reset } = useForm<ChatInputData>({
@@ -23,6 +24,8 @@ export const ChatInput = () => {
 
   const onSubmit = (data: ChatInputData) => {
     console.log('chatInputData: ', data);
+    const { text } = data;
+    sendMessage({ chatId, text });
     reset(); // limpiar el input después de enviar
     setHeight(40); // volver al tamaño inicial
   };

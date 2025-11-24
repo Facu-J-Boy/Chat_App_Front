@@ -57,7 +57,7 @@ export default function Chat() {
           contentContainerStyle={styles.messageList}
           inverted // para que el scroll se mantenga abajo
         />
-        <ChatInput />
+        <ChatInput chatId={id} />
       </View>
     </CustomKeyboardSafeView>
   );
@@ -73,20 +73,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // borderColor: 'red',
   },
-  header: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 80,
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 10,
-    elevation: 10, // Android
-    borderWidth: 1,
-    borderColor: 'red',
-  },
   messageList: {
-    paddingBottom: 10, // espacio mínimo para el input
+    paddingBottom: 60, // espacio mínimo para el input
   },
 });
