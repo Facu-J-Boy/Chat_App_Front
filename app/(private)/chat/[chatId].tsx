@@ -57,7 +57,7 @@ export default function Chat() {
           contentContainerStyle={styles.messageList}
           inverted // para que el scroll se mantenga abajo
         />
-        <ChatInput />
+        <ChatInput chatId={id} />
       </View>
     </CustomKeyboardSafeView>
   );
