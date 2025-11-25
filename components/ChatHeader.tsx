@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
-import { Avatar } from 'react-native-paper';
+import { View, StyleSheet, Text } from 'react-native';
 import { ChatInterface } from '../interfaces';
-import { getColorFromName } from './ChatCard';
+import { AvatarProfile } from './AvatarProfile';
 
 interface ChatHeaderProps {
   data: ChatInterface;
@@ -17,25 +16,15 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({ data }) => {
 
   const users_group = users.map((u) => u.name).join(', ');
 
-  const bgColor = getColorFromName(chat_title);
-
   return (
     <View style={styles.header}>
-      {image ? (
-        <Image
-          style={styles.image}
-          source={{
-            uri: image,
-          }}
-        />
-      ) : (
-        <Avatar.Text
-          style={{ marginRight: 20, backgroundColor: bgColor }}
+      <View style={{ marginRight: 20 }}>
+        <AvatarProfile
+          chat_title={chat_title}
+          image={image}
           size={40}
-          label={chat_title.charAt(0).toUpperCase()}
-          color="#fff"
         />
-      )}
+      </View>
       <View style={styles.textContainer}>
         <Text style={styles.chatTitle}>{chat_title}</Text>
         {isGroup && <Text>{`${users_group}, you`}</Text>}
@@ -64,12 +53,6 @@ const styles = StyleSheet.create({
     // elevation: 10, // Android
     // borderWidth: 1,
     // borderColor: 'red',
-  },
-  image: {
-    width: 40,
-    height: 40,
-    borderRadius: 100,
-    marginRight: 20,
   },
   textContainer: {
     // borderWidth: 1,
