@@ -1,23 +1,10 @@
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Avatar } from 'react-native-paper';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { ChatInterface } from '../interfaces';
 import { useMessageStore } from '../store/messagesStore';
-
-export const getColorFromName = (name: string) => {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let color = '#';
-  for (let i = 0; i < 3; i++) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += ('00' + value.toString(16)).slice(-2);
-  }
-  return color;
-};
+import { AvatarProfile } from './AvatarProfile';
 
 interface ChatCardProps {
   data: ChatInterface;
@@ -36,8 +23,6 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data }) => {
 
   const last_message = lastMessage?.text || null;
 
-  const bgColor = getColorFromName(chat_title);
-
   return (
     <TouchableOpacity
       style={styles.chatContainer}
@@ -46,21 +31,13 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data }) => {
         router.navigate(`/chat/${id}`);
       }}
     >
-      {image ? (
-        <Image
-          style={styles.image}
-          source={{
-            uri: image,
-          }}
-        />
-      ) : (
-        <Avatar.Text
-          style={{ marginRight: 20, backgroundColor: bgColor }}
+      <View style={{ marginRight: 20 }}>
+        <AvatarProfile
+          chat_title={chat_title}
+          image={image}
           size={60}
-          label={chat_title.charAt(0).toUpperCase()}
-          color="#fff"
         />
-      )}
+      </View>
 
       <View style={styles.textContainer}>
         <Text style={styles.name}>{chat_title}</Text>
@@ -84,12 +61,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 15,
-  },
-  image: {
-    width: 60,
-    height: 60,
-    borderRadius: 100,
-    marginRight: 20,
   },
   textContainer: {
     flex: 1,
