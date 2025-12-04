@@ -8,6 +8,8 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Controller, useForm } from 'react-hook-form';
 import { sendMessage } from '../actions/messageActions/sendMessage';
+import { useSessionStore } from '../store/sessionStore';
+import { useMessageStore } from '../store/messagesStore';
 
 type ChatInputData = {
   text: string;
@@ -15,6 +17,10 @@ type ChatInputData = {
 
 export const ChatInput = ({ chatId }: { chatId: number }) => {
   const [height, setHeight] = useState(60);
+
+  const { currentUser } = useSessionStore();
+
+  const { addMessage } = useMessageStore();
 
   const { control, handleSubmit, reset } = useForm<ChatInputData>({
     defaultValues: {
@@ -25,7 +31,12 @@ export const ChatInput = ({ chatId }: { chatId: number }) => {
   const onSubmit = (data: ChatInputData) => {
     console.log('chatInputData: ', data);
     const { text } = data;
-    sendMessage({ chatId, text });
+    sendMessage({
+      chatId,
+      userId: currentUser?.id,
+      text,
+      addMessage,
+    });
     reset(); // limpiar el input después de enviar
     setHeight(40); // volver al tamaño inicial
   };
