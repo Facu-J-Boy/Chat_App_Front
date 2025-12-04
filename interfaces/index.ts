@@ -1,17 +1,17 @@
 export interface UserInterface {
-  id: number;
-  name: string;
-  userName: string;
-  email: string;
-  password: string;
-  profile_image: null | string;
+  id: number | undefined;
+  name?: string;
+  userName?: string;
+  email?: string;
+  password?: string;
+  profile_image?: null | string;
 }
 
 export interface MessageInterface {
-  id: number;
+  id: number | string;
   sender: UserInterface;
   text: string;
-  createdAt: string;
+  createdAt: Date;
 }
 
 export interface ChatInterface {
